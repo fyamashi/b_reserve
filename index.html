@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Webブース予約</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side" id="side" aria-label="カレンダー">
+    <div class="brand-block">
+      <div class="org">ABCC</div>
+      <div class="brand"><div class="brand-mark"><i></i><i></i><i></i><i></i></div>Webブース予約</div>
+      <select class="place-select" id="placeSelect" aria-label="教室">
+        <option value="331" selected>331教室</option>
+      </select>
+    </div>
+    <div>
+      <div class="cal-head">
+        <button class="icon-btn" id="calPrev" aria-label="前の月">‹</button>
+        <div class="cal-title" id="calTitle"></div>
+        <button class="icon-btn" id="calNext" aria-label="次の月">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <button class="today-btn" id="todayBtn">今日に戻る</button>
+    </div>
+    <div class="side-foot" id="modeNote">読み込み中…</div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main class="main">
+    <div class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="カレンダーを開く">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      </button>
+      <button class="arrow" id="dayPrev" aria-label="前の日">◀</button>
+      <button class="arrow" id="dayNext" aria-label="次の日">▶</button>
+      <div class="date-label" id="dateLabel"></div>
+    </div>
+    <div class="grid-scroll" id="scroller">
+      <div class="grid" id="grid"></div>
+    </div>
+  </main>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <button class="modal-close" id="mClose" aria-label="閉じる">×</button>
+    <p class="modal-room" id="mHeading">新しい予約</p>
+    <input class="title-input" id="mTitle" type="text" placeholder="件名を入力" maxlength="80" autocomplete="off">
+    <div class="field"><label>日程</label><span class="val" id="mDate"></span></div>
+    <div class="field"><label for="mRoom">番号</label>
+      <select id="mRoom"></select>
+    </div>
+    <div class="field"><label>時刻</label>
+      <div class="time-row">
+        <input type="time" id="mStart" step="60" aria-label="開始時刻">
+        <span>〜</span>
+        <input type="time" id="mEnd" step="60" aria-label="終了時刻">
+      </div>
+    </div>
+    <div class="err" id="mErr"></div>
+    <div class="actions">
+      <button class="btn danger" id="mDelete" hidden>削除</button>
+      <button class="btn primary" id="mSave">保存</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- Firebase（共有保存を使う場合のみ読み込まれます） -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
