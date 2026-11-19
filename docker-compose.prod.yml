@@ -1,0 +1,14 @@
+services:
+  booth:
+    build: .
+    container_name: booth
+    restart: unless-stopped
+    environment:
+      BASE_PATH: /booth
+    ports:
+      - "88:80"
+    volumes:
+      - booth_data:/var/www/html/data
+
+volumes:
+  booth_data:

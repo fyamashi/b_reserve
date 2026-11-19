@@ -1,0 +1,14 @@
+services:
+  booth:
+    build: .
+    container_name: booth_staging
+    restart: unless-stopped
+    environment:
+      BASE_PATH: /booth-stg
+    ports:
+      - "8088:80"
+    volumes:
+      - booth_data:/var/www/html/data
+
+volumes:
+  booth_data:
