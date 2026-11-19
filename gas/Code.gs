@@ -77,7 +77,7 @@ function saveBooking_(input) {
     if (r.id === id || r.place !== place || Number(r.room) !== room || r.date !== date) continue;
     const s = toMin_(r.start), en = toMin_(r.end);
     if (s !== null && en !== null && s < end && start < en) {
-      return fail_('conflict', '番号' + room + 'は ' + toHm_(s) + '–' + toHm_(en) + ' に「' + cleanTitle_(r.title) + '」が入っています。');
+      return fail_('conflict', room + '番は ' + toHm_(s) + '–' + toHm_(en) + ' に「' + cleanTitle_(r.title) + '」が入っています。');
     }
   }
 
