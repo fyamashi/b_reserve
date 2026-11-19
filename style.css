@@ -71,7 +71,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 .grid-scroll{flex:1;overflow:auto;position:relative;background:var(--panel);overscroll-behavior:contain}
 .grid{display:grid;grid-template-columns:var(--timecol) repeat(8,minmax(84px,1fr));min-width:calc(var(--timecol) + 8*84px)}
-.ghead{position:sticky;top:0;z-index:4;height:var(--head);background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:center;padding-top:12px;font-weight:700;font-size:14px;border-left:1px solid var(--line-soft)}
+.ghead{position:sticky;top:0;z-index:4;height:var(--head);background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:center;padding-top:11px;font-weight:700;font-size:16px;border-left:1px solid var(--line-soft)}
 .ghead small{font-weight:400;color:var(--sub);font-size:11px;margin-right:2px}
 .ghead.corner{left:0;z-index:5;border-left:0}
 .tcol{position:sticky;left:0;z-index:3;background:var(--panel);border-right:1px solid var(--line)}
