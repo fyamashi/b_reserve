@@ -155,7 +155,7 @@ foreach ($rows as $r) {
     $s = toMin($r['start']); $e = toMin($r['end']);
     if ($s !== null && $e !== null && $s < $end && $start < $e) {
         flock($fp, LOCK_UN); fclose($fp);
-        fail(409, 'conflict', '番号' . $room . 'は ' . toHm($s) . '–' . toHm($e) . ' に「' . preg_replace("/^'(?=[=+\\-@])/", '', $r['title']) . '」が入っています。');
+        fail(409, 'conflict', $room . '番は ' . toHm($s) . '–' . toHm($e) . ' に「' . preg_replace("/^'(?=[=+\\-@])/", '', $r['title']) . '」が入っています。');
     }
 }
 

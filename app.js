@@ -143,7 +143,7 @@
       return null;
     }
     function conflictError(room, it){
-      const e = new Error("番号" + room + "は " + fmtMin(it.start) + "–" + fmtMin(it.end) + " に「" + (it.title || "件名なし") + "」が入っています。");
+      const e = new Error(room + "番は " + fmtMin(it.start) + "–" + fmtMin(it.end) + " に「" + (it.title || "件名なし") + "」が入っています。");
       e.code = "conflict"; return e;
     }
 
@@ -263,7 +263,7 @@
   const grid = $("grid");
   function buildGrid(){
     let html = '<div class="ghead corner"></div>';
-    for(let r=1;r<=ROOMS;r++) html += '<div class="ghead"><small>番号</small>'+r+'</div>';
+    for(let r=1;r<=ROOMS;r++) html += '<div class="ghead">'+r+'番</div>';
     html += '<div class="tcol">';
     for(let h=0;h<24;h++) html += '<div class="tlabel"><span>'+h+'</span></div>';
     html += '</div>';
@@ -312,7 +312,7 @@
         const t = document.createElement("b"); t.textContent = b.title || "（件名なし）";
         const s = document.createElement("span"); s.textContent = fmtMin(b.start)+"–"+fmtMin(b.end);
         el.append(t, s);
-        el.setAttribute("aria-label", "番号"+r+" "+fmtMin(b.start)+"から"+fmtMin(b.end)+" "+(b.title||"件名なし"));
+        el.setAttribute("aria-label", r+"番 "+fmtMin(b.start)+"から"+fmtMin(b.end)+" "+(b.title||"件名なし"));
         col.appendChild(el);
       });
       if(ds === iso(new Date())){
@@ -380,7 +380,7 @@
   // ---------- 入力ウィンドウ ----------
   const overlay = $("overlay");
   const mRoom = $("mRoom");
-  for(let r=1;r<=ROOMS;r++){ const o = document.createElement("option"); o.value = r; o.textContent = "番号 "+r; mRoom.appendChild(o); }
+  for(let r=1;r<=ROOMS;r++){ const o = document.createElement("option"); o.value = r; o.textContent = r+"番"; mRoom.appendChild(o); }
   const toInput = m => m >= 1440 ? "00:00" : fmtMin(m);
 
   function openNew(room, start, end){
@@ -442,7 +442,7 @@
     if(end === 0 && start > 0) end = 1440;   // 終了 0:00 は 24:00 として扱う
     if(end <= start){ $("mErr").textContent = "終了時刻は開始時刻より後にしてください。"; return; }
     const clash = dayBookings(editing.date).find(b => b.room === room && b.id !== editing.id && b.start < end && start < b.end);
-    if(clash){ $("mErr").textContent = "番号"+room+"は "+fmtMin(clash.start)+"–"+fmtMin(clash.end)+" に「"+(clash.title||"件名なし")+"」が入っています。"; return; }
+    if(clash){ $("mErr").textContent = room+"番は "+fmtMin(clash.start)+"–"+fmtMin(clash.end)+" に「"+(clash.title||"件名なし")+"」が入っています。"; return; }
     const b = {id:editing.id, place:currentPlace(), room, date:editing.date, start, end, title:$("mTitle").value.trim()};
     $("mSave").disabled = true; $("mSave").textContent = "保存中…";
     try { await store.save(b); closeModal(); }
@@ -482,6 +482,7 @@
 
   // ---------- マップ（教室の場所と番号の配置図） ----------
   const mapBtn = $("mapBtn");
+  if(mapBtn){
   function currentPlaceInfo(){ return CFG.places.find(p => p.id === currentPlace()) || null; }
   function updateMapButton(){
     const pl = currentPlaceInfo();
@@ -500,6 +501,7 @@
   });
   $("placeSelect").addEventListener("change", updateMapButton);
   updateMapButton();
+  }
 
   // ---------- トースト ----------
   let tt;
