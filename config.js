@@ -35,7 +35,8 @@ window.WEBBOOTH_CONFIG = {
   pollSeconds: 10,
 
   // 教室の一覧（先頭が初期表示）。id は保存データに記録される値
+  // map … [マップ]ボタンで開く画像（index.html からの相対パス）。省略するとボタンは出ない
   places: [
-    { id: "331", name: "331教室" }
+    { id: "331", name: "331教室", map: "images/map_3-331.jpg" }
   ]
 };

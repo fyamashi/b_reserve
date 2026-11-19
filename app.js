@@ -480,6 +480,27 @@
     });
   })();
 
+  // ---------- マップ（教室の場所と番号の配置図） ----------
+  const mapBtn = $("mapBtn");
+  function currentPlaceInfo(){ return CFG.places.find(p => p.id === currentPlace()) || null; }
+  function updateMapButton(){
+    const pl = currentPlaceInfo();
+    mapBtn.hidden = !(pl && pl.map);
+    if(pl) mapBtn.setAttribute("aria-label", pl.name + "のマップを新しいウインドウで開く");
+  }
+  mapBtn.addEventListener("click", () => {
+    const pl = currentPlaceInfo(); if(!pl || !pl.map) return;
+    const url = new URL(pl.map, location.href).href;
+    // 画像の大きさ（883×933）に合わせつつ、画面に収まるサイズで別ウインドウを開く
+    const w = Math.min(920, screen.availWidth - 40), h = Math.min(980, screen.availHeight - 60);
+    const left = Math.max(0, Math.round((screen.availWidth - w) / 2)), top = Math.max(0, Math.round((screen.availHeight - h) / 2));
+    const win = window.open(url, "webbooth_map", "popup=yes,width=" + w + ",height=" + h + ",left=" + left + ",top=" + top);
+    if(win) win.focus();
+    else toast("マップを開けませんでした。ブラウザのポップアップブロックを解除してください。");
+  });
+  $("placeSelect").addEventListener("change", updateMapButton);
+  updateMapButton();
+
   // ---------- トースト ----------
   let tt;
   function toast(msg){ const t = $("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("show"), 4000); }

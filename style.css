@@ -65,6 +65,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .date-label{font-weight:700;font-size:20px;margin-left:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .date-label .dow{font-size:15px;color:var(--sub);margin-left:4px;font-weight:400}
 .date-label .dow.sun{color:var(--sun)} .date-label .dow.sat{color:var(--sat)}
+.map-btn{margin-left:12px;display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;border:1px solid var(--accent);border-radius:8px;background:transparent;color:var(--accent);font-weight:700;font-size:14px;white-space:nowrap}
+.map-btn:hover{background:var(--hover)}
+.map-btn[hidden]{display:none}
 
 .grid-scroll{flex:1;overflow:auto;position:relative;background:var(--panel);overscroll-behavior:contain}
 .grid{display:grid;grid-template-columns:var(--timecol) repeat(8,minmax(84px,1fr));min-width:calc(var(--timecol) + 8*84px)}
@@ -134,6 +137,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   .menu-btn{display:grid}
   .topbar{padding:8px 10px;gap:4px}
   .date-label{font-size:17px;margin-left:4px}
+  .map-btn{margin-left:auto;padding:0 10px;height:36px}
   .grid{grid-template-columns:var(--timecol) repeat(8,minmax(72px,1fr));min-width:calc(var(--timecol) + 8*72px)}
   .overlay{align-items:flex-end;padding:0}
   .modal{border-radius:16px 16px 0 0;max-width:none;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
